@@ -1,0 +1,53 @@
+---
+title: "Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# SimpLin
+
+This package contains two functions, SimpLinR and SimpLinCpp. SimpLinCpp is an Rcpp function and SimpLinR is an R function.
+
+## SimpLinCpp.cpp
+
+SimpLinCpp takes two numeric vectors as inputs and fits a simple linear regression model. It returns a list containing estimated regression coefficients, standard errors, 95% confidence intervals, residuals, and fitted values. We will demonstrate how to call the function.
+
+```{r}
+library(SimpLin)
+
+# Create numeric vectors for inputs
+x = runif(100)
+y = 2*x + runif(100)
+
+# Call SimpLinCpp
+outputList = SimpLinCpp(x, y)
+```
+
+## SimpLinR.R
+
+SimpLinR is a wrapper function for SimpLinCpp and throws an error if either of the two inputs are not numeric vectors. We will demonstrate how to call the function.
+
+```{r}
+library(SimpLin)
+
+# Create numeric vectors for inputs
+x = runif(100)
+y = 2*x + runif(100)
+
+# Call SimpLinR
+outputList = SimpLinR(x, y)
+
+# Inputs other than numeric vectors
+#SimpLinR(c("a", "b", "c"), y)
+```

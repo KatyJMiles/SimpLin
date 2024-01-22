@@ -1,0 +1,16 @@
+Package: SimpLin
+Type: Package
+Title: FIT A SIMPLE LINEAR REGRESSION MODEL
+Version: 1.0
+Date: 2024-01-22
+Author: Katy Miles
+Maintainer: <kjmiles99@gmail.com>
+Description: Fits a simple linear regression model and outputs regression coefficients, standard errors, 95% CI's, residuals, and fitted values
+License: What license is it under?
+Imports: Rcpp (>= 1.0.10)
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 7.3.0
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
