@@ -3,10 +3,12 @@ title: "Vignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
-
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -17,18 +19,31 @@ knitr::opts_chunk$set(
 
 # SimpLin
 
-This package contains two functions, SimpLinR and SimpLinCpp. SimpLinCpp is an Rcpp function and SimpLinR is an R function.
+This package contains functions that fit a simple linear regression model for a given predictor and response variable.
+We will show use cases for each function and describe the output of the function.
 
 ## SimpLinCpp.cpp
 
-SimpLinCpp takes two numeric vectors as inputs and fits a simple linear regression model. It returns a list containing estimated regression coefficients, standard errors, 95% confidence intervals, residuals, and fitted values. We will demonstrate how to call the function.
+SimpLinCpp takes two numeric vectors as inputs and fits a simple linear regression model.It returns a list containing the following:
+
+-   **coefficients**: a vector of estimated regression coefficients, $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **se**: a vector of standard errors associated with $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **CI_upper**: a vector of upper bounds for the 95% confidence interval associated with $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **CI_lower**: a vector of lower bounds for the 95% confidence interval associated with $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **Residuals**: a vector of residuals defined as $y - \hat{y}$.
+
+-   **Fitted_Values**: a vector of fitted values from the model.
 
 ```{r}
 library(SimpLin)
 
 # Create numeric vectors for inputs
-x = runif(100)
-y = 2*x + runif(100)
+x = runif(10)
+y = 2*x + runif(10)
 
 # Call SimpLinCpp
 outputList = SimpLinCpp(x, y)
@@ -36,7 +51,20 @@ outputList = SimpLinCpp(x, y)
 
 ## SimpLinR.R
 
-SimpLinR is a wrapper function for SimpLinCpp and throws an error if either of the two inputs are not numeric vectors. We will demonstrate how to call the function.
+SimpLinR is a wrapper function for SimpLinCpp and throws an error if either of the two inputs are not numeric vectors.
+It returns a list containing the following:
+
+-   **coefficients**: a vector of estimated regression coefficients, $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **se**: a vector of standard errors associated with $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **CI_upper**: a vector of upper bounds for the 95% confidence interval associated with $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **CI_lower**: a vector of lower bounds for the 95% confidence interval associated with $\hat\beta_0$ and $\hat\beta_1$ respectively.
+
+-   **Residuals**: a vector of residuals defined as $y - \hat{y}$.
+
+-   **Fitted_Values**: a vector of fitted values from the model.
 
 ```{r}
 library(SimpLin)
@@ -47,7 +75,4 @@ y = 2*x + runif(100)
 
 # Call SimpLinR
 outputList = SimpLinR(x, y)
-
-# Inputs other than numeric vectors
-#SimpLinR(c("a", "b", "c"), y)
 ```
